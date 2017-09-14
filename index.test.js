@@ -74,7 +74,7 @@ test('ChangebackgroundColor: has method/function start and stop', (t) => {
   window.close();
 });
 
-test.cb('ChangebackgroundColor: call callback when start', (t) => {
+test.cb('ChangebackgroundColor: change color of given node', (t) => {
   t.plan(4);
 
   let backgroundColor = new ChangebackgroundColor(global.window.document.body);
