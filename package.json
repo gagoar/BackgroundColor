@@ -44,7 +44,7 @@
     "babel": "inherit"
   },
   "scripts": {
-    "start:example": "webpack-dev-server --progress",
+    "start:example": "webpack-dev-server --progress --config example/webpack.config.js",
     "test:debug": "inspect node_modules/ava/profile.js",
     "test": "ava --verbose",
     "test:watch": "yarn test -- --watch"
