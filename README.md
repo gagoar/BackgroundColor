@@ -12,12 +12,9 @@ super ultra micro tiny module that changes the background color of any given nod
 
 ```js
 
-import ChangebackgroundColor from './index';
+import changebackgroundColor from './index';
 
-const changeNodeColor = new ChangebackgroundColor(document.body);
-
-changeNodeColor.start({every: 30000, till: 50000});
-
+changebackgroundColor(document.body, (node, color) => console.log(`color used: ${color}` ));
 ```
 
 # Example

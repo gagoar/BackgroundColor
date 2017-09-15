@@ -1,5 +1,5 @@
 # Example
-this is a simple example,showing the use of `ChangebackgroundColor` lib;
+this is a simple example,showing the use of `changebackgroundColor` lib;
 
 #install
 
