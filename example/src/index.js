@@ -1,7 +1,5 @@
 /*global document :true*/
 
-import ChangebackgroundColor from '../../index';
+import changebackgroundColor from '../../index';
 
-const changeNodeColor = new ChangebackgroundColor(document.body);
-
-changeNodeColor.start({});
+changebackgroundColor(document.body, (node, color) => console.log(`color: ${color}`));

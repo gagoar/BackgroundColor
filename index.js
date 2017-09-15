@@ -1,101 +1,22 @@
-'use strict';
 /*global window :true*/
+import RandomColor from './src/RandomColor';
 
-// this 16777215 == ffffff in decimal
-const FFFFF = 16777215;
-// addapted from https://www.paulirish.com/2009/random-hex-color-code-snippets/
-const _getRandomColor = () => `#${Math.floor(Math.random() * FFFFF).toString(16)}`;
+const _changeNodeColor = (node, randomColor, callback) => {
+  const color = randomColor.getColor();
 
-const _isDomElement = (node = {}) => node.tagName;
+  node.style.backgroundColor = color;
 
-export class RandomColor {
-  constructor(repeate = false) {
-    this.state = {
-      repeate,
-      usedColors: [],
-    };
+  if (callback) {
+    callback(node, color);
   }
+};
 
-  canRepeat() {
-    return this.state.repeate;
-  }
+const changebackgroundColor = (node, callback) => {
+  const timers = {every: 1 * 1000, till: 10 * 1000};
+  const randomColor = new RandomColor();
+  const intervalID = window.setInterval(_changeNodeColor.bind(null, node, randomColor, callback), timers.every);
 
-  contains(color) {
-    return this.state.usedColors.indexOf(color) !== -1;
-  }
-  addColor(color) {
-    this.state.usedColors.push(color);
-  }
-  getColor() {
-    let color = _getRandomColor();
+  window.setTimeout(() => clearInterval(intervalID), timers.till);
+};
 
-    if (this.canRepeat()) {
-      return color;
-    }
-
-    if (this.contains(color)) {
-      return this.getColor();
-    }
-
-    this.addColor(color);
-    return color;
-  }
-}
-
-export default class BackgrounColor {
-  constructor(node) {
-    if (!_isDomElement(node)) {
-      throw new Error ('Please provide a HTMLElement');
-    }
-    this.state = {
-      node,
-      intervalID: null,
-      colorGenerator: new RandomColor(),
-    };
-  }
-
-  start({every = 1 * 1000, till = 10 * 1000}, callback) {
-    this.stop();
-    this.changeNodeColor(callback);
-    let intervalID = window.setInterval(this.changeNodeColor.bind(this, callback), every);
-    let timeoutID = window.setTimeout(this.stop.bind(this), till);
-
-    this.setIntervalID(intervalID);
-    this.setTimeoutID(timeoutID);
-  }
-  changeNodeColor(callback) {
-    let {colorGenerator, node} = this.state;
-    let color = colorGenerator.getColor();
-
-    node.style.backgroundColor = color;
-
-    if (callback) {
-      callback(color, node);
-    }
-  }
-
-  getIntervalID() {
-    return this.state.intervalID;
-  }
-
-  getTimeoutID() {
-    return this.state.timeoutID;
-  }
-
-  setTimeoutID(timeoutID) {
-    this.state.timeoutID = timeoutID;
-  }
-
-  setIntervalID(intervalID) {
-    this.state.intervalID = intervalID;
-  }
-  stop() {
-    if (this.getIntervalID()) {
-      window.clearInterval(this.getIntervalID());
-    }
-
-    if (this.getTimeoutID()) {
-      window.clearTimeout(this.getTimeoutID());
-    }
-  }
-}
+export default changebackgroundColor;
