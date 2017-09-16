@@ -10,9 +10,6 @@ module.exports = {
     filename: 'bundle.js',
   },
   resolve: {
-    // options for resolving module requests
-    // (does not apply to resolving to loaders)
-
     modules: [
       'node_modules',
       path.resolve(__dirname, 'src'),
@@ -21,6 +18,21 @@ module.exports = {
 
     extensions: ['.js', '.json', '.css'],
     // extensions that are used
+  },
+  module: {
+    rules: [
+      // Process JS with Babel.
+      {
+        test: /\.js$/,
+        loader: require.resolve('babel-loader'),
+        options: {
+          // This is a feature of `babel-loader` for webpack (not Babel itself).
+          // It enables caching results in ./node_modules/.cache/babel-loader/
+          // directory for faster rebuilds.
+          cacheDirectory: true,
+        },
+      },
+    ],
   },
   devServer: {
     contentBase: path.join(__dirname, 'public'),

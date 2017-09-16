@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style type="text/css">
+    html,body { height: 100%; margin: 0px; padding: 0px; }
+    .parent { display: flex; height: 100%}
+    .parent>div { flex:1; }
+    </style>
     <meta charset="utf-8">
 
     <title>BackgroundColor</title>
@@ -8,6 +13,7 @@
   </head>
 
   <body>
+    <div id='app'class='parent'> </div>
     <script src="http://localhost:8080/bundle.js"></script>
   </body>
 </html>

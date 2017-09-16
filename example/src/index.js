@@ -1,5 +1,15 @@
 /*global document :true*/
+import React from 'react';
+import {render} from 'react-dom';
+import withChangingbackgroundColor from './WrappedComponent';
 
-import changebackgroundColor from '../../index';
+const View = (props) => ( <div {...props} /> );
 
-changebackgroundColor(document.body, (node, color) => console.log(`color: ${color}`));
+const EnhancedView = withChangingbackgroundColor(View);
+
+const style = {borderColor: 'blue'};
+
+render(
+  <EnhancedView className="maria" style={style}/>,
+  document.getElementById('app')
+);

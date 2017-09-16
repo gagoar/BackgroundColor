@@ -4,7 +4,9 @@ import RandomColor from './src/RandomColor';
 const _changeNodeColor = (node, randomColor, callback) => {
   const color = randomColor.getColor();
 
-  node.style.backgroundColor = color;
+  if (node) {
+    node.style.backgroundColor = color;
+  }
 
   if (callback) {
     callback(node, color);
