@@ -1,0 +1,62 @@
+{
+  "name": "BackgroundColor",
+  "version": "0.0.1",
+  "description": "super ultra micro tiny module that changes the background color of any given node",
+  "main": "index.js",
+  "repository": "git@github.com:gagoar/BackgroundColor.git",
+  "author": "gagoar <xeroice@gmail.com>",
+  "license": "MIT",
+  "eslintConfig": {
+    "extends": "eventbrite",
+    "rules": {
+      "indent": [
+        "error",
+        2
+      ],
+      "no-unused-expressions": [
+        2,
+        {
+          "allowTernary": true
+        }
+      ],
+      "import/unambiguous": "off"
+    }
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current",
+            "browsers": [
+              "last 2 versions"
+            ]
+          }
+        }
+      ]
+    ]
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "scripts": {
+    "start:example": "webpack-dev-server --progress --config example/webpack.config.js",
+    "test:debug": "inspect node_modules/ava/profile.js",
+    "test": "ava --verbose",
+    "test:watch": "yarn test -- --watch"
+  },
+  "devDependencies": {
+    "ava": "^0.22.0",
+    "babel-eslint": "^7.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^3.0.0",
+    "eslint-config-eventbrite": "^4.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "jsdom": "^11.2.0"
+  }
+}
